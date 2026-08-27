@@ -250,6 +250,7 @@ fn retaining_wall_calculation_package_produces_valid_pdf() {
         checked_by: Some("PE Reviewer".into()),
         date: "August 27, 2026".into(),
         paper: PaperSize::Letter,
+        orientation: Orientation::Portrait,
     })
     .cover(CoverPage {
         title: "Concrete Retaining Wall".into(),

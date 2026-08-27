@@ -11,7 +11,8 @@ Compiles a structured document model into a publication-quality PDF using the
 - **Charts** — line, bar, scatter, and P-M interaction diagrams (vector SVG)
 - **Figures** — user-supplied PNG, JPEG, or SVG images
 - **Cover page** — title, logo, project info table, revision history
-- **Professional layout** — page numbers, header/footer, section numbering, Letter/Tabloid/A4
+- **Professional layout** — page numbers, header/footer, section numbering; Letter/Tabloid/A4 and Arch A–E / E1
+- **Drawing sheets** — landscape Arch sizes with sheet border and title block (sheet number, scale, revisions)
 
 ## Installation
 
@@ -34,6 +35,7 @@ let pdf_bytes = Report::new(ReportMetadata {
     checked_by:     None,
     date:           "March 14, 2025".into(),
     paper:          PaperSize::Letter,
+    orientation:    Orientation::Portrait,
 })
 .cover(CoverPage {
     title:        "Structural Beam Design".into(),
@@ -116,6 +118,43 @@ CalcBlock::new("Shear Capacity")
 ```
 
 Status controls the left border color: blue (Ok), green (Governs), gray (DoesNotGovern).
+
+## Drawing sheets
+
+Use Arch paper sizes with landscape orientation and a `TitleBlock` for structural
+drawing sheets. Attaching a title block switches page chrome to a sheet border and
+footer title block (instead of calculation-report headers).
+
+| `PaperSize` | Typst name | Size |
+|-------------|------------|------|
+| `ArchA` | `arch-a` | 9 × 12 in |
+| `ArchB` | `arch-b` | 12 × 18 in |
+| `ArchC` | `arch-c` | 18 × 24 in |
+| `ArchD` | `arch-d` | 24 × 36 in |
+| `ArchE` | `arch-e` | 36 × 48 in |
+| `ArchE1` | `arch-e1` | 30 × 42 in |
+
+```rust
+Report::new(ReportMetadata {
+    project_name: "Warehouse Addition".into(),
+    project_number: "2026-S-042".into(),
+    prepared_by: "SES Engineering".into(),
+    checked_by: Some("PE Reviewer".into()),
+    date: "August 27, 2026".into(),
+    paper: PaperSize::ArchD,
+    orientation: Orientation::Landscape,
+})
+.title_block(TitleBlock {
+    sheet_title: "Partial Framing Plan".into(),
+    sheet_number: "S-101".into(),
+    scale: "1/4\" = 1'-0\"".into(),
+    drawn_by: "AJ".into(),
+    checked_by: Some("PE".into()),
+    revisions: vec![("A".into(), "2026-08-27".into(), "For Review".into())],
+})
+/* .section(... plan figure, schedules ...) */
+.render()?;
+```
 
 ## License
 

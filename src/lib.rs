@@ -10,6 +10,7 @@
 //! - Line, bar, scatter, and P-M interaction charts (vector SVG)
 //! - User-supplied images and SVG figures
 //! - Cover page, section numbering, headers, footers, and page numbers
+//! - Drawing sheets with Arch paper sizes, landscape orientation, and title blocks
 //!
 //! # Quick start
 //!
@@ -23,6 +24,7 @@
 //!     checked_by:     None,
 //!     date:           "March 14, 2025".into(),
 //!     paper:          PaperSize::Letter,
+//!     orientation:    Orientation::Portrait,
 //! })
 //! .section(
 //!     Section::new("Moment Capacity")
@@ -42,6 +44,14 @@
 //!
 //! std::fs::write("report.pdf", pdf_bytes).unwrap();
 //! ```
+//!
+//! # Drawing sheets
+//!
+//! Attach a [`TitleBlock`] and choose an Arch paper size with landscape orientation
+//! for structural drawing sheets. Page chrome switches to a sheet border and title
+//! block footer instead of calculation-report headers.
+//!
+//! Supported Arch sizes: [`PaperSize::ArchA`] … [`PaperSize::ArchE`], [`PaperSize::ArchE1`].
 //!
 //! # Math notation
 //!
@@ -77,4 +87,6 @@ pub use element::{
     Equation, Figure, HeadingLevel, ImageFormat, Table, TableBuilder,
 };
 pub use error::PdfError;
-pub use report::{CoverPage, PaperSize, Report, ReportMetadata, Section};
+pub use report::{
+    CoverPage, Orientation, PaperSize, Report, ReportMetadata, Section, TitleBlock,
+};

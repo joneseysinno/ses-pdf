@@ -9,6 +9,7 @@ fn minimal_report_produces_valid_pdf() {
         checked_by: None,
         date: "January 1, 2025".into(),
         paper: PaperSize::Letter,
+        orientation: Orientation::Portrait,
     })
     .section(
         Section::new("Introduction")
@@ -128,6 +129,7 @@ fn full_engineering_report_produces_valid_pdf() {
         checked_by: Some("PE Reviewer".into()),
         date: "March 14, 2025".into(),
         paper: PaperSize::Letter,
+        orientation: Orientation::Portrait,
     })
     .cover(CoverPage {
         title: "Structural Beam Design".into(),

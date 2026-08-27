@@ -6,6 +6,7 @@ mod figure;
 mod heading;
 mod page;
 mod table;
+mod title_block;
 
 use crate::element::ReportElement;
 use crate::report::Report;
@@ -18,8 +19,11 @@ pub(crate) fn generate_source(report: &Report) -> Result<(String, VirtualFs), Pd
     let mut chart_idx: usize = 0;
     let mut figure_idx: usize = 0;
 
-    // Page setup
-    out.push_str(&page::generate_page_setup(&report.metadata));
+    // Page setup (report chrome vs drawing sheet title block)
+    out.push_str(&page::generate_page_setup(
+        &report.metadata,
+        report.title_block.as_ref(),
+    ));
 
     // Cover page
     if let Some(cov) = &report.cover {

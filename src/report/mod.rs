@@ -1,16 +1,19 @@
 mod cover;
 mod metadata;
 mod section;
+mod title_block;
 
 pub use cover::CoverPage;
-pub use metadata::{PaperSize, ReportMetadata};
+pub use metadata::{Orientation, PaperSize, ReportMetadata};
 pub use section::Section;
+pub use title_block::TitleBlock;
 
 use crate::PdfError;
 
 pub struct Report {
     pub(crate) metadata: ReportMetadata,
     pub(crate) cover: Option<CoverPage>,
+    pub(crate) title_block: Option<TitleBlock>,
     pub(crate) sections: Vec<Section>,
 }
 
@@ -19,12 +22,19 @@ impl Report {
         Self {
             metadata,
             cover: None,
+            title_block: None,
             sections: Vec::new(),
         }
     }
 
     pub fn cover(mut self, cover: CoverPage) -> Self {
         self.cover = Some(cover);
+        self
+    }
+
+    /// Attach a drawing-sheet title block. Switches page chrome to drawing mode.
+    pub fn title_block(mut self, title_block: TitleBlock) -> Self {
+        self.title_block = Some(title_block);
         self
     }
 
