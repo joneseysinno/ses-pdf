@@ -18,7 +18,7 @@ Compiles a structured document model into a publication-quality PDF using the
 
 ```toml
 [dependencies]
-ses-pdf = "0.1"
+ses-pdf = "0.2"
 ```
 
 Requires Rust **1.92** or later.

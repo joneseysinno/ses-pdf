@@ -1,18 +1,22 @@
 [package]
 name = "ses-pdf"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 # typst 0.15 requires Rust 1.92
 rust-version = "1.92"
 license = "MIT"
-description = "Professional PDF report engine for structural engineering calculations — equations, tables, charts, and cover pages via Typst."
+description = "Professional PDF report engine for structural engineering calculations and drawing sheets — equations, tables, charts, Arch sizes, and title blocks via Typst."
 readme = "README.md"
-repository = "https://github.com/FILL_IN/ses-pdf"
+repository = "https://github.com/joneseysinno/ses-pdf"
+homepage = "https://github.com/joneseysinno/ses-pdf"
+documentation = "https://docs.rs/ses-pdf"
 keywords = ["pdf", "engineering", "report", "typst", "chart"]
 categories = ["rendering", "visualization"]
+exclude = ["target/", "**/*.pdb"]
 
 [package.metadata.docs.rs]
 all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 thiserror = "2"
